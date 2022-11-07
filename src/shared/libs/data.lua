@@ -14,7 +14,7 @@ knit.Start():catch(warn):await()
 
 local data_service = {}
 
-task.wait(1)
+task.wait(0)
 local data_network = knit.GetService("data_network")
 
 function data_service.get_data(plr)
@@ -22,8 +22,5 @@ function data_service.get_data(plr)
         return data
     end)
 end
-
-
-print('client script finished')
 
 return data_service
