@@ -22,7 +22,6 @@ live_player_data = setmetatable({}, {
     end
 })
 
-
 function data_network:init(plr)
     local default_data = {
         speed_coins = 0,

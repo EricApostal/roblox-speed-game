@@ -17,7 +17,9 @@ local data_service = {}
 task.wait(0)
 local data_network = knit.GetService("data_network")
 
-function data_service.get_data(plr)
+function data_service:get_data(plr)
+    print("retrieving data for plr")
+    print(plr.Name)
     data_network:get_data(plr):andThen(function(data)
         return data
     end)
