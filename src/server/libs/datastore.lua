@@ -62,6 +62,7 @@ end
 
 function dataservice.wipe()
     -- Wipes the whole database
+    warn("You are attempting to recursively wipe the database! This is a bad idea, and takes a long time. I recommend you make a new database entirely, or remove an entry manually.")
     for _, key in database:GetAsync("keys") do
         database:RemoveAsync(key)
     end

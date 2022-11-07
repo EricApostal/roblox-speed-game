@@ -1,6 +1,7 @@
 local ContentProvider = game:GetService("ContentProvider")
-local speedcoins = {}
+local data = require( game:GetService("ReplicatedStorage").libs.data )
 
+local speedcoins = {}
 all_active_parts = {}
 
 function get_length(tbl: { [string | number]: any }): number
@@ -34,7 +35,8 @@ function speedcoins:spawn()
         if Object.Parent:FindFirstChild("Humanoid") then
             local plr = Object.Parent
             print("Coin touched by " .. plr.Name)
-
+            data:add_attribute(plr, "coin", 1)
+            print(data:get_attribute(plr, "coin"))
             all_active_parts[part] = nil
             part:Destroy()
         end

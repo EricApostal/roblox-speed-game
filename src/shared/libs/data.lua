@@ -23,4 +23,24 @@ function data_service.get_data(plr)
     end)
 end
 
+function data_service.set_data(plr)
+    data_network:get_data(plr):andThen(function(data)
+        return data
+    end)
+end
+
+function data_service:set_attribute(plr, attribute, value)
+    data_network:set_attribute(plr, attribute, value)
+end
+
+function data_service:add_attribute(plr, attribute, value)
+    data_network:set_attribute(plr, attribute, value)
+end
+
+function data_service:get_attribute(plr, attribute)
+    data_network:get_attribute(plr, attribute):andThen(function(attribute_data)
+        return attribute_data
+    end)
+end
+
 return data_service

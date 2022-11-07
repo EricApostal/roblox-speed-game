@@ -51,6 +51,10 @@ function data_network:set_attribute(plr, attribute, value)
     live_player_data[plr.UserId][attribute] = value
 end 
 
+function data_network:add_attribute(plr, attribute, value)
+    live_player_data[plr.UserId][attribute] += value
+end 
+
 --[[
     Client Replicated Functions
 ]]
