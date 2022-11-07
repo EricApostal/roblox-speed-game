@@ -16,24 +16,29 @@ end
 function speedcoins:spawn()
     local max_coins = 50
 
-    print("spawning part num " .. get_length(all_active_parts) )
-    print(all_active_parts)
-
     if get_length(all_active_parts) >= max_coins then return end
 
     local part = Instance.new("Part")
     part.Name = "SpeedCoin"
     part.Anchored = true
+    part.CanCollide = false
     part.Shape = Enum.PartType.Block
     part.Color = Color3.fromRGB(255, 255, 0)
-    part.Position = Vector3.new( math.random(-100, 100), 4, math.random(-100, 100 ) )
+    part.Position = Vector3.new( math.random(-200, 200), 1, math.random(-200, 200 ) )
     part.Size = Vector3.new(1, 2, 2)
     part.Parent = workspace
+    
     all_active_parts[part] = part
-    print("spawned part")
-    task.wait(10)
-    all_active_parts[part] = nil
-    print("removed part")
+
+    part.Touched:Connect(function(Object)
+        if Object.Parent:FindFirstChild("Humanoid") then
+            local plr = Object.Parent
+            print("Coin touched by " .. plr.Name)
+
+            all_active_parts[part] = nil
+            part:Destroy()
+        end
+    end)
 end
 
 function speedcoins:loop_spawn()
@@ -47,5 +52,7 @@ function speedcoins:loop_spawn()
         task.wait(0)
     end
 end
+
+
 
 return speedcoins
