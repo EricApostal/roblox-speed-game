@@ -23,6 +23,7 @@ function data_service.get_data(plr)
     end)
 end
 
+
 print('client script finished')
 
 return data_service
