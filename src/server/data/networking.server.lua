@@ -14,8 +14,7 @@ local data_network = knit.CreateService {
 
 live_player_data = setmetatable({}, {
     --[[
-        I am both indexing a nil, then assigning to a nil index
-        so I need both index and newindex.
+        __newindex wipes the full value of the array, so I can't use that
     ]]
     __index = function()
         print("indexing index")
@@ -23,7 +22,6 @@ live_player_data = setmetatable({}, {
     end
 })
 
--- live_player_data = {}
 
 function data_network:init(plr)
     local default_data = {
@@ -37,7 +35,8 @@ function data_network:init(plr)
         live_player_data[plr.UserId] = default_data
         print("Set player to default attributes (user not in database)")
     end
-    live_player_data[plr.UserId] = default_data -- delete
+
+    
 end
 
 function data_network:get_data(plr)

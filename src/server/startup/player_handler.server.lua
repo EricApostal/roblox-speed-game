@@ -14,7 +14,7 @@ function init_player(plr)
     print(plr_data)
 
     data_network:init(plr)
-    data_network:set_attribute(plr, "reee", "asd")
+    data_network:set_attribute(plr, "gaming", "yes")
 
 end
 
