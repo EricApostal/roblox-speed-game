@@ -8,16 +8,11 @@ local knit = require(RS.Packages.Knit)
 local datastore = require(game:GetService("ServerScriptService").libs.datastore)
 
 local data_network = knit.CreateService {
-    Name = "data_network",
-    Client = {}
+    Name = "data_network"
 }
 
 live_player_data = setmetatable({}, {
-    --[[
-        __newindex wipes the full value of the array, so I can't use that
-    ]]
     __index = function()
-        print("indexing index")
         return {}
     end
 })
@@ -34,8 +29,6 @@ function data_network:init(plr)
         live_player_data[plr.UserId] = default_data
         print("Set player to default attributes (user not in database)")
     end
-
-    
 end
 
 function data_network:get_data(plr)
@@ -61,5 +54,6 @@ end
 function data_network.Client:get_data(plr)
     return self.Server:get_data(plr)
 end
+print("Server Networking Fully Initialized")
 
 knit.Start():catch(warn)

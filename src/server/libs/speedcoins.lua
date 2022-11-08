@@ -1,5 +1,5 @@
-local ContentProvider = game:GetService("ContentProvider")
 local data = require( game:GetService("ReplicatedStorage").libs.data )
+local Players = game:GetService("Players")
 
 local speedcoins = {}
 all_active_parts = {}
@@ -33,8 +33,14 @@ function speedcoins:spawn()
 
     part.Touched:Connect(function(Object)
         if Object.Parent:FindFirstChild("Humanoid") then
-            local plr = Object.Parent
-            print("Coin touched by " .. plr.Name)
+            local plr = false -- to prevent annoying errors :)
+
+            for _,v in Players:GetPlayers() do -- I like to call this system hopes and prayers :)
+                if tostring(v.Name) == tostring(Object.Parent.Name) then
+                    plr = v
+                end
+            end
+
             data:add_attribute(plr, "coin", 1)
             print(data:get_attribute(plr, "coin"))
             all_active_parts[part] = nil
@@ -46,6 +52,7 @@ end
 function speedcoins:loop_spawn()
     print("Looping speedcoin spawn")
     while true do
+        
         local co = coroutine.create(function()
             speedcoins:spawn()
         end)

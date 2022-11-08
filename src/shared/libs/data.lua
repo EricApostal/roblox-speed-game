@@ -11,15 +11,17 @@
 
 local knit = require( game:GetService("ReplicatedStorage").Packages.Knit )
 knit.Start():catch(warn):await()
+task.wait(3)
+local data_network = knit.GetService("data_network")
 
 local data_service = {}
 
-task.wait(0)
-local data_network = knit.GetService("data_network")
-
 function data_service:get_data(plr)
-    print("retrieving data for plr")
+    print("data network: ")
+    print(data_network)
+    print("retrieving data for player")
     print(plr.Name)
+
     data_network:get_data(plr):andThen(function(data)
         return data
     end)
@@ -36,13 +38,11 @@ function data_service:set_attribute(plr, attribute, value)
 end
 
 function data_service:add_attribute(plr, attribute, value)
-    data_network:set_attribute(plr, attribute, value)
+    data_network:set_attribute(plr, attribute, data_network:get_attribute(plr, attribute) + value)
 end
 
 function data_service:get_attribute(plr, attribute)
-    data_network:get_attribute(plr, attribute):andThen(function(attribute_data)
-        return attribute_data
-    end)
+    return data_network:get_attribute(plr, attribute)
 end
 
 return data_service
