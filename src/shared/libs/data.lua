@@ -18,11 +18,6 @@ local data_network = knit.GetService("data_network")
 local data_service = {}
 
 function data_service:get_data(plr)
-    print("data network: ")
-    print(data_network)
-    print("retrieving data for player")
-    print(plr.Name)
-
     data_network:get_data(plr):andThen(function(data)
         return data
     end)
