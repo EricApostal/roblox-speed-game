@@ -10,8 +10,9 @@
 ]]
 
 local knit = require( game:GetService("ReplicatedStorage").Packages.Knit )
+task.wait(0.25)
 knit.Start():catch(warn):await()
-task.wait(3)
+
 local data_network = knit.GetService("data_network")
 
 local data_service = {}
