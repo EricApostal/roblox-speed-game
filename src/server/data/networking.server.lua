@@ -54,6 +54,11 @@ end
 function data_network.Client:get_data(plr)
     return self.Server:get_data(plr)
 end
+
+function data_network.Client:get_attribute(plr)
+    return self.Server:get_attribute(plr)
+end
+
 print("Server Networking Fully Initialized")
 
 knit.Start():catch(warn)

@@ -8,4 +8,4 @@ knit.Start():catch(warn):await()
 task.wait(3)
 
 print("Data recieved: ")
-print( data:get_data(Players.LocalPlayer) )
+print( data.get_data(Players.LocalPlayer) )
